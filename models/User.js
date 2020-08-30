@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
-
-// 스키마 -> 모델로 감싸줌 
+//1.스키마 생성 
 const userSchema = mongoose.Schema({
     name: {
         type:String,
@@ -32,10 +31,8 @@ const userSchema = mongoose.Schema({
         type: Number
     }
 })
-
-
-// 스키마로 모듈 생성 
+//2.모듈 생성 
 const User = mongoose.model('User', userSchema)
-// 생성한 모듈을 다른 파일에서도 사용하기 위해 
+//3.생성한 모듈 export 
 module.exports = { User }
 

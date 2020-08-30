@@ -24,6 +24,7 @@ app.post('/register', (req, res) => {
     //그것들을  데이터 베이스에 넣어준다. 
     const user = new User(req.body) //model에서 export 
 
+    //bcrypt 관련 작업은 저장 전 수행 
     user.save((err, userInfo) => { // save : mongodb method 
       if (err) return res.json({ success: false, err })
       return res.status(200).json({

@@ -4,6 +4,7 @@ const port = 5000
 const mongooese = require('mongoose');
 const bodyParser = require('body-parser');
 const { User } = require("./models/User");
+const config = require("./config/key");
 
 //application/x-www-form-urlencoded 형태 데이터를 파싱하여 가져옴 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -11,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //application/json 형태 데이터를 파싱하여 가져옴 
 app.use(bodyParser.json());
 
-mongooese.connect('mongodb+srv://yunmi:hohobanga6@boilerplate.2r0f9.mongodb.net/<dbname>?retryWrites=true&w=majority', {
+mongooese.connect(config.mongoURI, {
     useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
 }).then(() => console.log('MongoDB connected...'))
   .catch(err => console.log(err))

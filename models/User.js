@@ -36,3 +36,4 @@ const User = mongoose.model('User', userSchema)
 //3.생성한 모듈 export 
 module.exports = { User }
 
+

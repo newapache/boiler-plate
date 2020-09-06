@@ -4,7 +4,7 @@ const port = 5000
 const mongooese = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const { auth } = require('./middleware/auth');
+const { auth1 } = require('./middleware/auth');
 const { User } = require("./models/User");
 const config = require("./config/key");
 
@@ -68,21 +68,16 @@ app.post('/api/users/login', (req, res) => {
               .json({ loginSuccess: true, userId: user._id })
           })
         })
-        
-        
-
       })
-
 })
 
-
-app.get('/api/users/auth', auth, (req, res) => {
-  //여기 까지 미들웨어를 통과해 왔다는 얘기는  Authentication 이 True 라는 말.
+app.get('/api/users/auth', auth1, (req, res) => {
+  //여기 까지 미들웨어를 통과해 왔다는 얘기는  Authentication 이 True 라는 말. next로 넘어옴 
   res.status(200).json({
     _id: req.user._id,
     isAdmin: req.user.role === 0 ? false : true,
     isAuth: true,
-    email: req.user.email,
+    email: req.user.email, //auth에서 req에 user정보를 담았기 때문에 사용 가능 
     name: req.user.name,
     lastname: req.user.lastname,
     role: req.user.role,
@@ -90,10 +85,23 @@ app.get('/api/users/auth', auth, (req, res) => {
   })
 })
 
-  
+app.get('/api/users/logout', auth1, (req, res) => {
+  // console.log('req.user', req.user)
+  User.findOneAndUpdate({ _id: req.user._id },
+    { token: "" }
+    , (err, user) => {
+      if (err) return res.json({ success: false, err });
+      return res.status(200).send({
+        success: true
+      })
+    })
+})
+
 app.listen(port, () => { 
   console.log(`Example app listening at http://localhost:${port}`)
 })
+
+
 
 
 

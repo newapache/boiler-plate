@@ -1,6 +1,6 @@
 const { User } = require('../models/User');
 
-let auth = (req, res, next) => {
+let auth1 = (req, res, next) => {
     //인증 처리를 하는곳 
     //클라이언트 쿠키에서 토큰을 가져온다.
 
@@ -13,11 +13,11 @@ let auth = (req, res, next) => {
 
         // console.log('userh', user)
 
-        req.token = token;
+        req.token = token; // 넣어야 get cb에서 유저 정보를 활용 가능 
         req.user = user;
-        next();
+        next(); // next가 없으면 이 부분 수행 후 미들웨어에 갇힘. index.js의 get cb를 이어 수행하려면 호출 
     })
 }
 
 
-module.exports = { auth };
+module.exports = { auth1 };

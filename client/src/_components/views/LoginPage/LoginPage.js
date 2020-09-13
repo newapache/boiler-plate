@@ -24,7 +24,9 @@ function LoginPage() {
             password: Password
         }
 
-        //redux를 쓰지 않았다면  여기서 axios로 post로 처리 
+        // (redux를 쓰지 않았다면  여기서 axios로 post로 처리 )
+        // redux (1) dispatch로 action (loginUser) 처리 (_actions/user_action.js 작성 )
+        // redux (2) action수행 결과를 reducer로 보내기 
         dispatch(loginUser(body))
             .then(response => {
                 if (response.payload.loginSuccess) {

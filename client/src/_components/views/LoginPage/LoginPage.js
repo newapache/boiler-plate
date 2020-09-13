@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { loginUser } from '../../../_actions/user_action';
 
-function LoginPage() {
+
+function LoginPage(props) {
     const dispatch = useDispatch();
 
     const [Email, setEmail] = useState("") // "" 빈 문자열로 초기화 
@@ -28,13 +30,14 @@ function LoginPage() {
         // redux (1) dispatch로 action (loginUser) 처리 (_actions/user_action.js 작성 )
         // redux (2) action수행 결과를 reducer로 보내기 
         dispatch(loginUser(body))
-            .then(response => {
-                if (response.payload.loginSuccess) {
-                    props.history.push('/')
-                } else {
-                    alert('Error˝')
-                }
-            })
+         .then(response => {
+            if (response.payload.loginSuccess) {
+                props.history.push('/')
+            } else {
+                alert('Error˝')
+            }
+        })
+
     }
 
     return (

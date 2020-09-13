@@ -9,9 +9,9 @@ export default function (state = {}, action) { //이전 state과 action으로 �
         case LOGIN_USER:
             return { ...state, loginSuccess: action.payload } // nextstate
             break;
-        // case REGISTER_USER:
-        //     return { ...state, register: action.payload }
-        //     break;
+        case REGISTER_USER:
+            return { ...state, register: action.payload }
+            break;
         // case AUTH_USER:
         //     return { ...state, userData: action.payload }
         //     break;
@@ -19,3 +19,4 @@ export default function (state = {}, action) { //이전 state과 action으로 �
             return state;
     }
 }
+

@@ -15,3 +15,15 @@ export function loginUser(dataToSubmit) { //dispatch가 수행할 액션
         payload: request
     }
 }
+
+
+export function registerUser(dataToSubmit) {
+
+    const request = axios.post('/api/users/register', dataToSubmit)
+        .then(response => response.data)
+
+    return {
+        type: REGISTER_USER,
+        payload: request
+    }
+}
